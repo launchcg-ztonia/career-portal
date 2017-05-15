@@ -90,6 +90,14 @@ class SearchService {
         return result;
     }
 
+    get _localSearchServiceUrl() {
+        return `/wp-json/bh-api/v1/search`; // Cheating, using the local api endpoint
+    }
+
+    get _localQueryServiceUrl() {
+        return `/wp-json/bh-api/v1/query`; // Cheating, using the local api endpoint
+    }
+
     get _queryUrl() {
         return this._.queryUrl || (this._.queryUrl = `${this._publicServiceUrl}/query/JobBoardPost`);
     }
@@ -238,7 +246,8 @@ class SearchService {
     }
 
     get _searchUrl() {
-        return this._.searchUrl || (this._.searchUrl = `${this._publicServiceUrl}/search/JobOrder`);
+        // return this._.searchUrl || (this._.searchUrl = `${this._publicServiceUrl}/search/JobOrder`);
+        return this._.searchUrl || (this._.searchUrl = this._localSearchServiceUrl); //`${this._publicServiceUrl}/search/JobOrder`);
     }
 
     getCountByLocation(callback, errorCallback) {
