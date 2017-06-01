@@ -67,13 +67,13 @@ class JobDetailController {
     }
 
     loadRelatedJobs() {
-        let job = this.job || {},
-            category = job.publishedCategory || {},
-            categoryId = category.id ? category.id : '',
-            jobId = job.id;
+        let job = this.job || {};
+        let category = job.publishedCategory || {};
+        let categoryId = category.id ? category.id : '';
+        let jobId = job.id;
 
         if (categoryId || jobId) {
-            this.SearchService.loadJobDataByCategory(categoryId, jobId)
+            this.SearchService.loadJobDataByCategory(categoryId, jobId) //WHY NETWORK REQUEST????
                 .then(data => {
                     this.relatedJobs = data;
                 });
@@ -83,9 +83,9 @@ class JobDetailController {
     }
 
     loadJobsWithCategory(categoryID) {
-        this.SearchService.helper.emptyCurrentDataList();
-        this.SearchService.helper.resetStartAndTotal();
-        this.SearchService.helper.clearSearchParams();
+        this.SearchService.emptyCurrentDataList();
+        this.SearchService.resetStartAndTotal();
+        this.SearchService.clearSearchParams();
         this.SearchService.searchParams.category.push(categoryID);
         this.SearchService.findJobs();
         this.$location.path('/jobs');

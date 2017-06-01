@@ -30,51 +30,120 @@
         </div>
         -->
 
-        <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
+        <section class="filter-section" data-ng-class="{'active':!sidebar.divisionLimitTo}">
             <div class="filter-section-header">
-                <h4>{{'common.categorySectionHeading' | i18n}}</h4>
-                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
-                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
-                </button>
-            </div>
-
-            <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's category list - R.D. -->
-            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo track by category.publishedCategory.id">
-                <input type="checkbox" id="{{::category.publishedCategory.id}}" data-ng-checked="sidebar.hasCategoryFilter(category)" data-ng-click="sidebar.addOrRemoveCategory(category)">
-                <label for="{{::category.publishedCategory.id}}">{{::category.publishedCategory.name}}</label>
-                <span>{{category.idCount}}</span>
-            </div>
-
-            <span class="show-more" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">
-                {{'sidebar.showMoreLabel' | i18n}}
-            </span>
-            <span class="show-more" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">
-                {{'sidebar.showLessLabel' | i18n}}
-            </span>
-        </section>
-
-        <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
-            <div class="filter-section-header">
-                <h4>{{'common.locationSectionHeading' | i18n}}</h4>
-                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
+                <h4>{{'common.divisionSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.division.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('division');" name="clear-all">
                     <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
                 </button>
             </div>
 
             <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's location list - R.D. -->
-            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo | orderBy:'location.address.city' track by location.address.city + ',' + location.address.state">
-                <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" data-ng-checked="sidebar.hasLocationFilter(location)" data-ng-click="sidebar.addOrRemoveLocation(location)">
-                <label for="{{::location.address.city}},{{::location.address.state}}">{{::location.address.city}},&nbsp;{{::location.address.state}}</label>
-                <span>{{location.idCount}}</span>
+            <div class="filter-item slide-down-item" data-ng-repeat="division in filteredDivisions = (sidebar.divisions | omitFilters:'division':sidebar.SearchService.searchParams.division) | limitTo:sidebar.divisionLimitTo | orderBy:'division' track by division">
+                <input type="checkbox" id="{{::division}}" data-ng-checked="sidebar.hasDivisionFilter(division)" data-ng-click="sidebar.addOrRemoveDivision(division)">
+                <label for="{{::division}}">{{::division}}</label>
+                <span>{{division.idCount}}</span>
             </div>
 
-            <span class="show-more" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">
+            <span class="show-more" data-ng-if="sidebar.divisionLimitTo && filteredDivisions.length > 8" data-ng-click="sidebar.updateDivisionLimitTo(null)">
                  {{'sidebar.showMoreLabel' | i18n}}
             </span>
-            <span class="show-more" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">
+            <span class="show-more" data-ng-if="!sidebar.divisionLimitTo" 
+                data-ng-click="sidebar.updateDivisionLimitTo(8)">
                  {{'sidebar.showLessLabel' | i18n}}
             </span>
         </section>
+
+        <section class="filter-section" data-ng-class="{'active':!sidebar.branchLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'common.branchSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.branch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('branch');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+
+            <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's location list - R.D. -->
+            <div class="filter-item slide-down-item" data-ng-repeat="branch in filteredBranches = (sidebar.branches | omitFilters:'branch':sidebar.SearchService.searchParams.branch) | limitTo:sidebar.branchLimitTo | orderBy:'branch' track by branch">
+                <input type="checkbox" id="{{::branch}}" data-ng-checked="sidebar.hasBranchFilter(branch)" data-ng-click="sidebar.addOrRemoveBranch(branch)">
+                <label for="{{::branch}}">{{::branch}}</label>
+                <span>{{branch.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.branchLimitTo && filteredBranches.length > 8" data-ng-click="sidebar.updateBranchLimitTo(null)">
+                 {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.branchLimitTo" data-ng-click="sidebar.updateBranchLimitTo(8)">
+                 {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+
+        <section class="filter-section" data-ng-class="{'active':!sidebar.stateLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'common.stateSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.state.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('state');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+
+            <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's location list - R.D. -->
+            <div class="filter-item slide-down-item" data-ng-repeat="state in filteredStates = (sidebar.states | omitFilters:'state':sidebar.SearchService.searchParams.state) | limitTo:sidebar.stateLimitTo | orderBy:'state' track by state">
+                <input type="checkbox" id="{{::state}}" data-ng-checked="sidebar.hasStateFilter(state)" data-ng-click="sidebar.addOrRemoveState(state)">
+                <label for="{{::state}}">{{::state}}</label>
+                <span>{{state.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.stateLimitTo && filteredStates.length > 8" data-ng-click="sidebar.updateStateLimitTo(null)">
+                 {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.stateLimitTo" data-ng-click="sidebar.updateStateLimitTo(8)">
+                 {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+
+        <section class="filter-section" data-ng-class="{'active':!sidebar.cityLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'common.citySectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.city.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('city');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+
+            <div class="filter-item slide-down-item" data-ng-repeat="city in filteredCities = (sidebar.cities | omitFilters:'city':sidebar.SearchService.searchParams.city) | limitTo:sidebar.cityLimitTo | orderBy:'city' track by city">
+                <input type="checkbox" id="{{::city}}" data-ng-checked="sidebar.hasCityFilter(city)" data-ng-click="sidebar.addOrRemoveCity(city)">
+                <label for="{{::city}}">{{::city}}</label>
+                <span>{{city.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.cityLimitTo && filteredCities.length > 8" data-ng-click="sidebar.updateCityLimitTo(null)">
+                 {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.cityLimitTo" data-ng-click="sidebar.updateCityLimitTo(8)">
+                 {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+
+        <section class="filter-section" data-ng-class="{'active':!sidebar.employmentTypeLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'common.employmentTypeSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.employmentType.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('employmentType');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+            
+            <div class="filter-item slide-down-item" data-ng-repeat="employmentType in filteredEmploymentTypes = (sidebar.employmentTypes | omitFilters:'employmentType':sidebar.SearchService.searchParams.employmentType) | limitTo:sidebar.employmentTypeLimitTo | orderBy:'employmentType' track by employmentType">
+                <input type="checkbox" id="{{::employmentType}}" data-ng-checked="sidebar.hasEmploymentTypeFilter(employmentType)" data-ng-click="sidebar.addOrRemoveEmploymentType(employmentType)">
+                <label for="{{::employmentType}}">{{::employmentType}}</label>
+                <span>{{employmentType.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.employmentTypeLimitTo && filteredEmploymentType.length > 8" data-ng-click="sidebar.updateEmploymentTypeLimitTo(null)">
+                 {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.employmentTypeLimitTo" data-ng-click="sidebar.updateEmploymentTypeLimitTo(8)">
+                 {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+
 
         <section class="credits">
             <span class="powered-by">{{'sidebar.poweredByText' | i18n}}</span>

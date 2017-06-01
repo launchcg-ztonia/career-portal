@@ -1,13 +1,19 @@
 <section class="job-list">
     <!-- LIST HEADER -->
-    <h4 data-ng-if="!list.SearchService.helper.isSearching && list.SearchService.currentListData.length">{{'list.jobListHeading' | i18n}}</h4>
+    <h4 data-ng-if="!list.SearchService.isSearching && list.SearchService.filteredListData.length">{{'list.jobListHeading' | i18n}}</h4>
+    <div data-ng-if="list.SearchService.isSearching">
+        <div class="sk-wandering-cubes">
+          <div class="sk-cube"></div>
+          <div class="sk-cube2"></div>
+        </div>
+    </div>
     <!-- JOBS CONTAINER -->
     <div class="cards">
         <!-- JOBS -->
-        <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
+        <div class="card-wrapper" data-ng-repeat="job in list.SearchService.filteredListData | orderBy:dateLastPublished">
             <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}">
                 <!-- TIMESTAMP -->
-                <span class="card-date" data-ng-if="job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{job.dateLastPublished | displayDate}}</span>
+                <span class="card-division-branch">{{job.customText3}} - {{job.customText5}}</span>
                 <!-- CATEGORY -->
                 <span class="card-title-category">
                     <span class="card-title">{{::job.title}}</span>
@@ -27,7 +33,7 @@
         </div>
     </div>
     <!-- NO RESULTS -->
-    <div class="no-data-message" data-ng-if="!list.SearchService.helper.isSearching && !list.SearchService.currentListData.length">
+    <div class="no-data-message" data-ng-if="!list.SearchService.isSearching && !list.SearchService.filteredListData.length">
         <h2>{{'common.noDataHeading' | i18n}}</h2>
         <h3>{{'list.noDataMessage' | i18n}}</h3>
         <p data-ng-if="list.SearchService.searchParams.location.length || list.SearchService.searchParams.category.length || list.SearchService.searchParams.textSearch.length">
@@ -35,7 +41,7 @@
         </p>
     </div>
     <!-- LOAD MORE -->
-    <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">
+    <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.hasMore">
         {{'list.loadMoreDataLabel' | i18n}}
     </p>
 </section>

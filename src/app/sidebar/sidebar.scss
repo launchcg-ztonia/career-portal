@@ -91,6 +91,7 @@ aside {
                 margin: 0;
                 border: none;
                 background: transparent;
+                color: white
             }
 
             > input.search {
@@ -142,6 +143,7 @@ aside {
                     border: none;
                     background: transparent;
                     float: right;
+                    color: white;
                 }
             }
 
@@ -193,9 +195,9 @@ aside {
                     }
 
                     &:checked {
-                        background: $primary;
+                        background: $header-bg;
                         & + label {
-                            color: $primary;
+                            color: $header-bg;
                         }
                     }
                 }

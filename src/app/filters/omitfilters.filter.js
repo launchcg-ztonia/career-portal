@@ -7,10 +7,28 @@ class OmitFilters {
 
             return collection.filter(function (element) {
                 let isChecked = false;
-                if (type === 'location') {
-                    isChecked = params ? params.indexOf(element.address.city + '|' + element.address.state) >= 0 : false;
-                } else {
-                    isChecked = params ? params.indexOf(element.publishedCategory.id) >= 0 : false;
+
+                switch (type) {
+                    case 'state':
+                        isChecked = params ? params.indexOf(element) >= 0 : false;
+                        break;
+                    case 'city':
+                        isChecked = params ? params.indexOf(element) >= 0 : false;
+                        break;
+                    case 'division':
+                        isChecked = params ? params.indexOf(element) >= 0 : false;
+                        break;
+                    case 'branch':
+                        isChecked = params ? params.indexOf(element) >= 0 : false;
+                        break;
+                    case 'employmentType':
+                        isChecked = params ? params.indexOf(element) >= 0 : false;
+                        break;
+                    case 'publishedCategory':
+                        isChecked = params ? params.indexOf(element.publishedCategory.id) >= 0 : false;
+                        break;
+                    default:
+                        isChecked = params ? params.indexOf(element.publishedCategory.id) >= 0 : false;
                 }
                 return element.idCount !== 0 || isChecked;
             });

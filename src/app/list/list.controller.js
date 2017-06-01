@@ -14,7 +14,7 @@ class JobListController {
     }
 
     clearSearchParamsAndLoadData() {
-        this.SearchService.helper.clearSearchParams();
+        this.SearchService.clearSearchParams();
         this.SearchService.searchParams.reloadAllData = true;
         this.SearchService.findJobs();
     }
